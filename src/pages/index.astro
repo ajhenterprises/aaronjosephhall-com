@@ -19,7 +19,7 @@ const bookSummary = featuredBook
 
 <BaseLayout
   title={SITE.name}
-  description="Aaron Joseph Hall is a pastor, author, speaker, teacher, and leadership writer."
+  description="Aaron Joseph Hall is a pastor, husband, father, and author. His ministry blog covers life, faith, family, ministry, and technology, alongside the website development, hosting, and content + copywriting work he does."
   path="/"
 >
   <section class="border-b border-stone-light/60">
@@ -28,22 +28,18 @@ const bookSummary = featuredBook
         <p class="eyebrow">Pastor &middot; Husband &middot; Father &middot; Author &middot; Speaker</p>
         <h1 class="mt-4 text-5xl md:text-6xl leading-[0.95]">{SITE.name}</h1>
         <p class="mt-6 max-w-xl text-lg text-stone">
-          I write and teach on leadership formed by character, the slow work of building a church
-          that lasts, and a faith meant to hold up on an ordinary Tuesday — not just a Sunday
-          morning.
+          I'm a pastor, husband, father, and author. This is my ministry blog — writing on life,
+          faith, family, ministry, and technology — alongside the digital media work I do: website
+          development &amp; hosting, and content + copywriting.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/articles" class="rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
             Read the writing
           </a>
-          <a href="/speaking" class="rounded border border-ink px-6 py-3 text-sm font-medium text-ink hover:bg-ink hover:text-parchment transition-colors">
-            Booking &amp; speaking
+          <a href="/work-with-me" class="rounded border border-ink px-6 py-3 text-sm font-medium text-ink hover:bg-ink hover:text-parchment transition-colors">
+            Work with me
           </a>
         </div>
-        <p class="mt-6 text-xs text-stone italic">
-          Draft homepage copy — written as a placeholder, not migrated from the live site. Replace
-          any time.
-        </p>
       </div>
     </div>
   </section>
@@ -63,7 +59,7 @@ const bookSummary = featuredBook
       {[
         { label: "Speaking", href: "/speaking", copy: speakingSummary || "Topics available on request." },
         { label: "Books", href: "/books", copy: bookSummary },
-        { label: "Work With Me", href: "/work-with-me", copy: "Website development, hosting, and content + copywriting." },
+        { label: "Work With Me", href: "/work-with-me", copy: "Website development & hosting, and content + copywriting." },
         { label: "Newsletter", href: "/newsletter", copy: "Get new writing and updates in your inbox." },
       ].map((card) => (
         <a href={card.href} class="group block rounded-lg border border-stone-light/70 bg-white/40 p-6 hover:shadow-md transition-shadow">

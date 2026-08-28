@@ -13,7 +13,7 @@ export async function GET(context) {
 
   return rss({
     title: SITE.name,
-    description: "Essays and reflections on leadership, faith, church, and calling.",
+    description: "A ministry blog on life, faith, family, ministry, and technology.",
     site: context.site ?? SITE.url,
     items: sorted.map((entry) => ({
       title: entry.data.title,
