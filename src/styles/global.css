@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  /* Editorial, warm, masculine palette. Ink on parchment, one warm accent. */
+  --color-ink: #1c1917;
+  --color-ink-soft: #3a352f;
+  --color-parchment: #faf6ee;
+  --color-parchment-dim: #f1ead9;
+  --color-stone: #8a8175;
+  --color-stone-light: #d8d0c0;
+  --color-clay: #b5502f;
+  --color-clay-dark: #8f3d22;
+  --color-forest: #2f3b2e;
+
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --container-prose: 68ch;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-clay);
+    color: var(--color-parchment);
+  }
+}
+
+@layer components {
+  .prose-article {
+    font-family: var(--font-body);
+    color: var(--color-ink-soft);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    max-width: var(--container-prose);
+  }
+
+  .prose-article p {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  .prose-article h2 {
+    font-size: 1.75rem;
+    margin-top: 2.5em;
+    margin-bottom: 0.75em;
+  }
+
+  .prose-article h3 {
+    font-size: 1.35rem;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+
+  .prose-article blockquote {
+    border-left: 3px solid var(--color-clay);
+    padding-left: 1.25em;
+    font-style: italic;
+    color: var(--color-ink);
+    margin: 2em 0;
+  }
+
+  .prose-article a {
+    color: var(--color-clay-dark);
+    text-decoration: underline;
+  }
+
+  .prose-article ul, .prose-article ol {
+    margin: 1.5em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose-article li {
+    margin: 0.5em 0;
+  }
+
+  .prose-article img {
+    border-radius: 0.25rem;
+    margin: 2em 0;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-clay-dark);
+  }
+
+  .content-pending-notice {
+    border: 1px dashed var(--color-stone-light);
+    background: var(--color-parchment-dim);
+    color: var(--color-ink-soft);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}

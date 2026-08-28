@@ -1,0 +1,108 @@
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
+
+// Preserved verbatim from the existing live site's article archive.
+// Do not add/remove/rename categories without confirming with the site owner.
+export const ARTICLE_CATEGORIES = [
+  "Christian Life",
+  "Church",
+  "Church & Ministry",
+  "Communication",
+  "Culture",
+  "Devotionals",
+  "Discipleship",
+  "Faith",
+  "Faith & Work",
+  "Leadership",
+  "Ministry",
+  "Personal Growth",
+  "Purpose & Calling",
+  "Writing",
+] as const;
+
+const articles = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/articles" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      // Optional: the migration inventory did not include verified publish
+      // dates for every article. Never fill this with a guessed date —
+      // leave it unset (the archive will show "Date pending") until the
+      // real date is confirmed.
+      date: z.coerce.date().optional(),
+      updatedDate: z.coerce.date().optional(),
+      // Optional for the same reason as `date`: the inventory confirmed the
+      // *set* of categories in use archive-wide, not which category each of
+      // the four verified articles individually belongs to. Leave unset
+      // rather than guess from the title.
+      category: z.enum(ARTICLE_CATEGORIES).optional(),
+      excerpt: z.string(),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      author: z.string().default("Aaron Joseph Hall"),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      draft: z.boolean().default(false),
+      // True while this entry only carries verified metadata (title/date/
+      // category/URL) and is still waiting on the original body copy from
+      // aaronjosephhall.com. Never set to false by rewriting/inventing the
+      // body — only once the real text has been pasted in verbatim.
+      contentPending: z.boolean().default(false),
+    }),
+});
+
+const speaking = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/speaking" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      order: z.number().default(99),
+      excerpt: z.string(),
+      image: image().optional(),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      contentPending: z.boolean().default(false),
+    }),
+});
+
+const books = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/books" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      isbn10: z.string().optional(),
+      isbn13: z.string().optional(),
+      pageCount: z.number().optional(),
+      publisher: z.string().optional(),
+      publishDate: z.coerce.date().optional(),
+      cover: image().optional(),
+      coverAlt: z.string().optional(),
+      purchaseLinks: z
+        .array(z.object({ label: z.string(), url: z.string().url() }))
+        .default([]),
+      excerpt: z.string(),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      order: z.number().default(99),
+      contentPending: z.boolean().default(false),
+    }),
+});
+
+const media = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/media" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      date: z.coerce.date().optional(),
+      type: z.enum(["Sermon", "Interview", "Conversation", "Podcast"]),
+      embedUrl: z.string().url().optional(),
+      image: image().optional(),
+      excerpt: z.string(),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      contentPending: z.boolean().default(false),
+    }),
+});
+
+export const collections = { articles, speaking, books, media };

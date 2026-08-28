@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import { ARTICLE_CATEGORIES } from "@/content.config";
+
+const allArticles = (await getCollection("articles", ({ data }) => !data.draft)).sort((a, b) => {
+  const ad = a.data.date?.getTime() ?? 0;
+  const bd = b.data.date?.getTime() ?? 0;
+  return bd - ad;
+});
+
+const [featured, ...rest] = allArticles;
+const usedCategories = ARTICLE_CATEGORIES.filter((c) => allArticles.some((a) => a.data.category === c));
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays and reflections on leadership, faith, church, and calling from Aaron Joseph Hall."
+  path="/articles"
+>
+  <section class="border-b border-stone-light/60 bg-parchment-dim/50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <p class="eyebrow">Writing</p>
+      <h1 class="mt-3 text-4xl md:text-5xl max-w-2xl">Essays on leadership, faith, and the long obedience.</h1>
+      <p class="mt-5 max-w-xl text-stone text-lg">
+        Reflections from the pulpit, the front porch, and the work of planting and leading a church.
+      </p>
+    </div>
+  </section>
+
+  {featured && (
+    <section class="mx-auto max-w-6xl px-6 py-14">
+      <p class="eyebrow mb-5">Featured</p>
+      <ArticleCard entry={featured} featured />
+    </section>
+  )}
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <p class="eyebrow">All writing</p>
+      <div class="flex items-center gap-3">
+        <label for="article-search" class="sr-only">Search articles</label>
+        <input
+          id="article-search"
+          type="search"
+          placeholder="Search articles…"
+          class="rounded border border-stone-light bg-white/60 px-3 py-1.5 text-sm text-ink placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-clay"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter by category">
+      <button type="button" class="category-filter-btn" data-category="all" aria-pressed="true">All</button>
+      {usedCategories.map((c) => (
+        <button type="button" class="category-filter-btn" data-category={c} aria-pressed="false">{c}</button>
+      ))}
+    </div>
+
+    <ul id="article-grid" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {rest.map((entry) => (
+        <li
+          class="article-grid-item"
+          data-category={entry.data.category ?? ""}
+          data-title={entry.data.title.toLowerCase()}
+          data-excerpt={entry.data.excerpt.toLowerCase()}
+        >
+          <ArticleCard entry={entry} />
+        </li>
+      ))}
+    </ul>
+
+    <p id="no-results" hidden class="text-stone text-sm py-10 text-center">No articles match your search.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .category-filter-btn {
+    border: 1px solid var(--color-stone-light);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    background: transparent;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .category-filter-btn[aria-pressed="true"] {
+    background: var(--color-clay);
+    border-color: var(--color-clay);
+    color: var(--color-parchment);
+  }
+</style>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLLIElement>(".article-grid-item"));
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".category-filter-btn"));
+  const searchInput = document.getElementById("article-search") as HTMLInputElement | null;
+  const noResults = document.getElementById("no-results");
+
+  let activeCategory = "all";
+
+  function applyFilters() {
+    const query = (searchInput?.value ?? "").trim().toLowerCase();
+    let visibleCount = 0;
+
+    for (const item of items) {
+      const matchesCategory = activeCategory === "all" || item.dataset.category === activeCategory;
+      const matchesQuery =
+        query === "" ||
+        item.dataset.title?.includes(query) ||
+        item.dataset.excerpt?.includes(query);
+      const visible = matchesCategory && matchesQuery;
+      item.hidden = !visible;
+      if (visible) visibleCount += 1;
+    }
+
+    if (noResults) noResults.hidden = visibleCount !== 0;
+  }
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.category ?? "all";
+      for (const b of buttons) b.setAttribute("aria-pressed", String(b === button));
+      applyFilters();
+    });
+  }
+
+  searchInput?.addEventListener("input", applyFilters);
+</script>

@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatDate } from "@/lib/format";
+
+const media = (await getCollection("media")).sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+---
+
+<BaseLayout
+  title="Media"
+  description="Sermons, interviews, and conversations featuring Aaron Joseph Hall."
+  path="/media"
+>
+  <section class="border-b border-stone-light/60 bg-parchment-dim/50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <p class="eyebrow">Media</p>
+      <h1 class="mt-3 text-4xl md:text-5xl max-w-2xl">Sermons, interviews & conversations</h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {media.map((entry) => (
+        <li>
+          <a href={`/media/${entry.id}`} class="group block h-full rounded-lg border border-stone-light/70 bg-white/40 overflow-hidden transition-shadow hover:shadow-md">
+            <div class="aspect-video bg-parchment-dim flex items-center justify-center text-stone">
+              <span class="font-display text-2xl opacity-40">&#9654;</span>
+            </div>
+            <div class="p-6">
+              <p class="eyebrow">{entry.data.type}</p>
+              <h2 class="mt-2 text-xl font-display text-ink group-hover:text-clay-dark">{entry.data.title}</h2>
+              {entry.data.date ? (
+                <time datetime={entry.data.date.toISOString()} class="mt-3 block text-xs text-stone">
+                  {formatDate(entry.data.date)}
+                </time>
+              ) : (
+                <p class="mt-3 text-xs text-stone italic">Date pending</p>
+              )}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

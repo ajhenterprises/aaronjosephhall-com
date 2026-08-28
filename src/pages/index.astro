@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import { SITE } from "@/data/site";
+
+const latestArticles = (await getCollection("articles", ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={SITE.name}
+  description="Aaron Joseph Hall is a pastor, author, speaker, teacher, and leadership writer."
+  path="/"
+>
+  <section class="border-b border-stone-light/60">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-32 grid gap-10 md:grid-cols-[1.3fr_1fr] items-end">
+      <div>
+        <p class="eyebrow">Pastor &middot; Author &middot; Speaker &middot; Teacher &middot; Consultant</p>
+        <h1 class="mt-4 text-5xl md:text-6xl leading-[0.95]">{SITE.name}</h1>
+        <p class="mt-6 max-w-xl text-lg text-stone">
+          Writing and teaching on leadership, faith, and the long, patient work of building something
+          that lasts. Homepage intro copy is pending verbatim migration from the live site.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/articles" class="rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
+            Read the writing
+          </a>
+          <a href="/speaking" class="rounded border border-ink px-6 py-3 text-sm font-medium text-ink hover:bg-ink hover:text-parchment transition-colors">
+            Booking &amp; speaking
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+    <div class="flex items-center justify-between mb-8">
+      <p class="eyebrow">Latest writing</p>
+      <a href="/articles" class="text-sm font-medium text-clay-dark hover:underline">View all &rarr;</a>
+    </div>
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {latestArticles.map((entry) => <li><ArticleCard entry={entry} /></li>)}
+    </ul>
+  </section>
+
+  <section class="border-t border-stone-light/60 bg-parchment-dim/50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        { label: "Speaking", href: "/speaking", copy: "Lead Well, Redeem the Story, church planting, and more." },
+        { label: "Books", href: "/books", copy: "Redeem the Story: A Call to Let God Rewrite Your Story." },
+        { label: "Leadership", href: "/leadership", copy: "Teaching and writing on Christian leadership." },
+        { label: "Consulting", href: "/consulting", copy: "Content strategy, copywriting, and SEO." },
+      ].map((card) => (
+        <a href={card.href} class="group block rounded-lg border border-stone-light/70 bg-white/40 p-6 hover:shadow-md transition-shadow">
+          <h2 class="font-display text-xl group-hover:text-clay-dark">{card.label}</h2>
+          <p class="mt-2 text-sm text-stone">{card.copy}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import { NAV_LINKS, SITE } from "@/data/site";
+
+const links = NAV_LINKS.filter((l) => l.inNav !== false);
+const current = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === "/") return current === "/";
+  return current === href || current.startsWith(`${href}/`);
+}
+---
+
+<header class="border-b border-stone-light/60 bg-parchment/95 backdrop-blur sticky top-0 z-40">
+  <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
+    <a href="/" class="font-display text-xl tracking-tight text-ink shrink-0">
+      {SITE.name}
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-7 text-sm">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "font-medium transition-colors hover:text-clay-dark",
+            isActive(link.href) ? "text-clay-dark" : "text-ink-soft",
+          ]}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <details class="md:hidden relative">
+      <summary class="list-none cursor-pointer select-none rounded border border-stone-light px-3 py-1.5 text-sm font-medium text-ink-soft">
+        Menu
+      </summary>
+      <nav
+        aria-label="Primary"
+        class="absolute right-0 mt-2 w-56 rounded-lg border border-stone-light bg-parchment shadow-lg p-3 flex flex-col gap-1"
+      >
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="rounded px-3 py-2 text-sm font-medium text-ink-soft hover:bg-parchment-dim hover:text-clay-dark"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>
