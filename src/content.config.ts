@@ -95,7 +95,11 @@ const media = defineCollection({
     z.object({
       title: z.string(),
       date: z.coerce.date().optional(),
-      type: z.enum(["Sermon", "Interview", "Conversation", "Podcast"]),
+      // Optional for the same reason as article `category`: the inventory
+      // confirmed the media section includes sermons, interviews, and
+      // conversations, not which type each verified entry is. Leave unset
+      // rather than guess from the title.
+      type: z.enum(["Sermon", "Interview", "Conversation", "Podcast"]).optional(),
       embedUrl: z.string().url().optional(),
       image: image().optional(),
       excerpt: z.string(),
