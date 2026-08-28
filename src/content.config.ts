@@ -94,24 +94,4 @@ const books = defineCollection({
     }),
 });
 
-const media = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/media" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      date: z.coerce.date().optional(),
-      // Optional for the same reason as article `category`: the inventory
-      // confirmed the media section includes sermons, interviews, and
-      // conversations, not which type each verified entry is. Leave unset
-      // rather than guess from the title.
-      type: z.enum(["Sermon", "Interview", "Conversation", "Podcast"]).optional(),
-      embedUrl: z.string().url().optional(),
-      image: image().optional(),
-      excerpt: z.string(),
-      seoTitle: z.string().optional(),
-      seoDescription: z.string().optional(),
-      contentPending: z.boolean().default(false),
-    }),
-});
-
-export const collections = { articles, speaking, books, media };
+export const collections = { articles, speaking, books };

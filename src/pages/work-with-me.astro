@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContentPendingNotice from "@/components/ContentPendingNotice.astro";
+import { SITE } from "@/data/site";
+
+// New page (2026-08-28), not migrated from the live site. Service list and
+// framing come directly from the site owner; descriptive copy below is a
+// Claude-authored draft to replace page-by-page.
+const services = [
+  {
+    name: "Website Development",
+    description:
+      "Design and build of a fast, modern website — from a first launch to a redesign of an existing site.",
+  },
+  {
+    name: "Hosting",
+    description:
+      "Ongoing hosting and upkeep so your site stays online, secure, and up to date without you having to think about it.",
+  },
+  {
+    name: "Content + Copywriting",
+    description:
+      "Writing for the pages themselves, email newsletters, and blog posts — copy that sounds like you and says what it needs to say.",
+  },
+];
+---
+
+<BaseLayout
+  title="Work With Me"
+  description="Website development, hosting, and content + copywriting services from Aaron Joseph Hall."
+  path="/work-with-me"
+>
+  <section class="border-b border-stone-light/60 bg-parchment-dim/50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <p class="eyebrow">Work With Me</p>
+      <h1 class="mt-3 text-4xl md:text-5xl max-w-2xl">Services</h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-6 py-16">
+    <ContentPendingNotice variant="ai-draft" />
+
+    <p class="prose-article mt-8">
+      I offer a small set of services for churches, ministries, and organizations that need a
+      website built well and content written with care.
+    </p>
+
+    <div class="mt-12">
+      <ul class="grid gap-6 sm:grid-cols-2">
+        {services.map((service) => (
+          <li class="rounded-lg border border-stone-light/70 bg-white/40 p-6">
+            <h2 class="font-display text-xl">{service.name}</h2>
+            <p class="mt-2 text-sm text-stone">{service.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="mt-14">
+      <a
+        href={`mailto:${SITE.email}`}
+        class="inline-block rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
+      >
+        Start a conversation
+      </a>
+    </div>
+  </section>
+</BaseLayout>

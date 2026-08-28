@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContentPendingNotice from "@/components/ContentPendingNotice.astro";
+import { SITE } from "@/data/site";
+
+// New page (2026-08-28), not migrated from the live site. Pure filler —
+// no signup copy, provider, or cadence has been confirmed yet.
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Sign up for Aaron Joseph Hall's newsletter."
+  path="/newsletter"
+>
+  <section class="mx-auto max-w-2xl px-6 py-16 md:py-24">
+    <p class="eyebrow">Newsletter</p>
+    <h1 class="mt-3 text-4xl md:text-5xl">Stay in touch</h1>
+
+    <div class="mt-8">
+      <ContentPendingNotice />
+    </div>
+
+    <p class="mt-8 text-stone text-lg">
+      Placeholder copy — the newsletter's focus, frequency, and signup provider are still pending.
+      Replace this paragraph once that's decided.
+    </p>
+
+    <div class="mt-10 rounded-lg border border-dashed border-stone-light bg-parchment-dim/60 p-6 text-sm text-stone">
+      This site is static, so signup needs an embedded form from a provider (e.g. Substack,
+      ConvertKit, Buttondown) or a serverless function acting only as a mail-list relay — no
+      database involved. Confirm the provider and I'll wire up the real form here.
+    </div>
+
+    <a
+      href={`mailto:${SITE.email}`}
+      class="mt-8 inline-block rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
+    >
+      {SITE.email}
+    </a>
+  </section>
+</BaseLayout>

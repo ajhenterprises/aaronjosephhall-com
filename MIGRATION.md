@@ -17,18 +17,21 @@ confirms it's complete by other means.
 
 ## Pages — status: verified list, structure built
 
+**Trimmed to the site owner's requested page set (2026-08-28).** `/leadership`,
+`/consulting`, `/ministry`, and `/media` (plus its content collection) were
+removed entirely, not hidden. `/work-with-me` and `/newsletter` are new pages
+with Claude-drafted filler content, to be replaced page by page.
+
 | URL | Built | Copy status |
 |---|---|---|
 | `/` | ✅ | Placeholder hero/intro copy |
 | `/about` | ✅ | Pending — no body copy supplied yet |
-| `/speaking` | ✅ | Structure built, topic list may be incomplete (see below) |
+| `/articles` (nav label "Writing") | ✅ | Archive + client-side category filter + search built |
 | `/books` | ✅ | Structure built, book list may be incomplete (see below) |
-| `/leadership` | ✅ | Structure list preserved verbatim; intro copy pending |
-| `/consulting` | ✅ | Service list preserved verbatim; descriptions pending |
-| `/ministry` | ✅ | Area list preserved verbatim; descriptions pending |
-| `/media` | ✅ | Structure built, media list may be incomplete (see below) |
-| `/articles` | ✅ | Archive + client-side category filter + search built |
+| `/speaking` | ✅ | Structure built, topic list may be incomplete (see below) |
 | `/contact` | ✅ | Placeholder — need to confirm form vs. mailto on the live site |
+| `/work-with-me` | ✅ | New page — Claude-drafted service descriptions, pending review |
+| `/newsletter` | ✅ | New page — pure filler, provider/cadence not yet decided |
 
 ## Articles — 4 of an unknown total
 
@@ -66,13 +69,6 @@ with the exact trailing-slash URL preserved. Description, ISBN, page count,
 and purchase links are all pending — none of that text was in the supplied
 inventory. Whether additional books exist on the live `/books` index is
 unverified.
-
-## Media — 2 of an unknown total
-
-`/media/week-11-acts-6-aaron-joseph-hall` and
-`/media/freedom-people-purpose-vision-casting` are built. Whether these are
-sermons, interviews, or conversations, their dates, embeds, and descriptions
-are all pending. Whether additional media entries exist is unverified.
 
 ## Redirects
 

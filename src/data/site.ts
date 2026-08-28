@@ -16,18 +16,17 @@ export interface NavLink {
   href: string;
 }
 
-// Preserves every verified top-level URL from the live site. `ministry` is
-// included in the nav for now per "we can decide later" — flip `inNav` to
-// false to drop it without touching the route or losing the page.
+// Trimmed to the site owner's requested page set (2026-08-28): Home, About,
+// Writing, Books, Speaking, Contact, Work With Me, Newsletter. Everything
+// else (Leadership, Consulting, Ministry, Media) was removed rather than
+// hidden — see MIGRATION.md.
 export const NAV_LINKS: (NavLink & { inNav?: boolean })[] = [
   { label: "About", href: "/about" },
   { label: "Writing", href: "/articles" },
   { label: "Speaking", href: "/speaking" },
   { label: "Books", href: "/books" },
-  { label: "Leadership", href: "/leadership" },
-  { label: "Consulting", href: "/consulting" },
-  { label: "Ministry", href: "/ministry", inNav: true },
-  { label: "Media", href: "/media" },
+  { label: "Work With Me", href: "/work-with-me" },
+  { label: "Newsletter", href: "/newsletter" },
   { label: "Contact", href: "/contact" },
 ];
 
