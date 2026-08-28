@@ -48,6 +48,11 @@ const articles = defineCollection({
       // aaronjosephhall.com. Never set to false by rewriting/inventing the
       // body — only once the real text has been pasted in verbatim.
       contentPending: z.boolean().default(false),
+      // True when the body below was drafted by Claude as a placeholder
+      // (explicitly requested), not migrated from the live site. Always
+      // pair with contentPending: true — an AI draft is still not the
+      // real, final copy.
+      aiDraft: z.boolean().default(false),
     }),
 });
 

@@ -1,12 +1,32 @@
 ---
-// Rendered only on entries seeded from the migration inventory that are
-// still waiting on verbatim original content. Never delete this by writing
-// placeholder prose into the body — replace the body with the real text and
-// remove the `contentPending` flag in the entry's frontmatter instead.
+// Rendered on entries seeded from the migration inventory that don't yet
+// carry the real, original copy from aaronjosephhall.com. Two variants:
+//
+// - "empty" (default): nothing has been written yet.
+// - "ai-draft": the body below is a placeholder draft written by Claude,
+//   not Aaron's original text — safe to publish-look-at but not to treat
+//   as real content.
+//
+// Never delete this by writing content into the body without setting the
+// entry's frontmatter accordingly.
+interface Props {
+  variant?: "empty" | "ai-draft";
+}
+const { variant = "empty" } = Astro.props;
 ---
 
 <div class="content-pending-notice not-prose" role="note">
-  <strong>Content pending.</strong> This entry was seeded from the verified migration
-  inventory (title, date, category, URL) but is still waiting on the original body
-  copy from aaronjosephhall.com. Nothing below is final.
+  {variant === "ai-draft" ? (
+    <>
+      <strong>Draft placeholder.</strong> The text below was drafted by Claude to stand in for
+      the real article while the site is being built — it is not Aaron's original writing.
+      Replace it (or edit it into shape) whenever you're ready.
+    </>
+  ) : (
+    <>
+      <strong>Content pending.</strong> This entry was seeded from the verified migration
+      inventory (title, date, category, URL) but is still waiting on the original body
+      copy from aaronjosephhall.com. Nothing below is final.
+    </>
+  )}
 </div>
