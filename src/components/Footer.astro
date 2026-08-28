@@ -23,6 +23,7 @@ const year = new Date().getFullYear();
       <p class="eyebrow mb-3">Connect</p>
       <ul class="space-y-2">
         <li><a href={`mailto:${SITE.email}`} class="text-ink-soft hover:text-clay-dark">{SITE.email}</a></li>
+        <li><a href="/rss.xml" class="text-ink-soft hover:text-clay-dark">RSS feed</a></li>
         {SOCIAL_LINKS.map((s) => (
           <li><a href={s.href} target="_blank" rel="noreferrer" class="text-ink-soft hover:text-clay-dark">{s.label}</a></li>
         ))}

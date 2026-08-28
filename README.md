@@ -43,9 +43,17 @@ guessed; components render a "pending" state instead of inventing content.
 
 ## Redirects
 
-If a slug must change, add an entry to `vercel.json`'s `redirects` array
-(create the file if it doesn't exist yet) so the old public URL keeps
-resolving. Do not silently rename a live URL.
+If a slug must change, add an entry to `vercel.json`'s `redirects` array so
+the old public URL keeps resolving. Do not silently rename a live URL.
+
+`vercel.json` deliberately does not set a global `trailingSlash` value.
+Vercel's `trailingSlash` config is site-wide (true/false), but this site's
+verified URLs are mixed — the one book page keeps its trailing slash while
+articles, speaking topics, and media entries don't. Astro's static output
+(`dist/<route>/index.html` for every route) serves both the with- and
+without-slash form of any URL without a forced redirect, so the mix works
+without needing per-path Vercel config. Each page's `<link rel="canonical">`
+still points at the exact original URL form for SEO.
 
 ## Local development
 

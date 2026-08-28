@@ -7,6 +7,14 @@ import { SITE } from "@/data/site";
 const latestArticles = (await getCollection("articles", ({ data }) => !data.draft))
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
   .slice(0, 3);
+
+const speakingTopics = (await getCollection("speaking")).sort((a, b) => a.data.order - b.data.order);
+const speakingSummary = speakingTopics.map((t) => t.data.title).join(", ");
+
+const [featuredBook] = (await getCollection("books")).sort((a, b) => a.data.order - b.data.order);
+const bookSummary = featuredBook
+  ? [featuredBook.data.title, featuredBook.data.subtitle].filter(Boolean).join(": ")
+  : "Books";
 ---
 
 <BaseLayout
@@ -48,8 +56,8 @@ const latestArticles = (await getCollection("articles", ({ data }) => !data.draf
   <section class="border-t border-stone-light/60 bg-parchment-dim/50">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {[
-        { label: "Speaking", href: "/speaking", copy: "Lead Well, Redeem the Story, church planting, and more." },
-        { label: "Books", href: "/books", copy: "Redeem the Story: A Call to Let God Rewrite Your Story." },
+        { label: "Speaking", href: "/speaking", copy: speakingSummary || "Topics available on request." },
+        { label: "Books", href: "/books", copy: bookSummary },
         { label: "Leadership", href: "/leadership", copy: "Teaching and writing on Christian leadership." },
         { label: "Consulting", href: "/consulting", copy: "Content strategy, copywriting, and SEO." },
       ].map((card) => (
