@@ -31,7 +31,12 @@ const usedCategories = ARTICLE_CATEGORIES.filter((c) => allArticles.some((a) => 
   </section>
 
   {featured && (
-    <section class="mx-auto max-w-6xl px-6 py-14">
+    <section
+      class="mx-auto max-w-6xl px-6 py-14 article-grid-item"
+      data-category={featured.data.category ?? ""}
+      data-title={featured.data.title.toLowerCase()}
+      data-excerpt={featured.data.excerpt.toLowerCase()}
+    >
       <p class="eyebrow mb-5">Featured</p>
       <ArticleCard entry={featured} featured />
     </section>
@@ -94,7 +99,7 @@ const usedCategories = ARTICLE_CATEGORIES.filter((c) => allArticles.some((a) => 
 </style>
 
 <script>
-  const items = Array.from(document.querySelectorAll<HTMLLIElement>(".article-grid-item"));
+  const items = Array.from(document.querySelectorAll<HTMLElement>(".article-grid-item"));
   const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".category-filter-btn"));
   const searchInput = document.getElementById("article-search") as HTMLInputElement | null;
   const noResults = document.getElementById("no-results");
