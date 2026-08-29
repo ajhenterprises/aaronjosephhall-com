@@ -1,0 +1,65 @@
+---
+// Shown once per browser (via localStorage) until the visitor makes a
+// choice. No analytics are wired up yet — this establishes the consent
+// record ("essential" vs "all") for when they are.
+---
+
+<div
+  id="cookie-banner"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-parchment shadow-[0_-4px_12px_rgba(0,0,0,0.08)]"
+  role="region"
+  aria-label="Cookie notice"
+>
+  <div class="mx-auto max-w-6xl px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+    <p class="text-sm text-ink-soft max-w-2xl">
+      This site uses essential cookies to work properly, and optional analytics cookies to
+      understand how the site is used. You choose what's allowed.{" "}
+      <a href="/legal/privacy-policy" class="font-medium text-clay hover:underline">Privacy policy</a>.
+    </p>
+    <div class="flex flex-wrap gap-3 shrink-0">
+      <button
+        type="button"
+        id="cookie-essential-only"
+        class="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-medium text-ink hover:border-ink hover:bg-ink/5 transition-colors"
+      >
+        Essential Only
+      </button>
+      <button
+        type="button"
+        id="cookie-accept-all"
+        class="rounded-full bg-clay text-parchment px-5 py-2.5 text-sm font-medium hover:bg-clay-dark transition-colors"
+      >
+        Accept All
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = "cookie-consent";
+  const banner = document.getElementById("cookie-banner");
+
+  function setChoice(choice: "all" | "essential") {
+    try {
+      localStorage.setItem(STORAGE_KEY, choice);
+    } catch {
+      // Storage unavailable (private mode, blocked) — just hide the banner for this visit.
+    }
+    if (banner) banner.hidden = true;
+  }
+
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    // Storage unavailable — treat as no choice made yet, banner still shows once per page load.
+  }
+
+  if (banner && !stored) {
+    banner.hidden = false;
+  }
+
+  document.getElementById("cookie-accept-all")?.addEventListener("click", () => setChoice("all"));
+  document.getElementById("cookie-essential-only")?.addEventListener("click", () => setChoice("essential"));
+</script>
