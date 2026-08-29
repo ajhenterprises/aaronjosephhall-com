@@ -720,6 +720,57 @@ animation: ml-form-embedSubmitLoad 1.2s linear infinite;
   }
 </style>
 
+<style is:global>
+  /* Wider, shorter layout on larger screens: email + name side by side,
+     consent checkbox and submit button sharing a row. Falls back to the
+     original stacked layout below 640px. */
+  @media (min-width: 640px) {
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper.embedForm {
+      max-width: 640px !important;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 14px 12px;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent {
+      flex: 1 1 100% !important;
+      margin: 0 !important;
+      display: flex;
+      gap: 12px;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+      width: auto !important;
+      flex: 1 1 0;
+      margin: 0 !important;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions {
+      flex: 1 1 100% !important;
+      margin: 0 !important;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+      width: auto !important;
+      flex: 1 1 auto;
+      min-width: 0;
+      margin: 0 !important;
+      float: none !important;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+      width: auto !important;
+      flex: 0 0 auto;
+      margin: 0 0 0 auto !important;
+      float: none !important;
+    }
+    #mlb2-787755.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+      width: auto !important;
+      padding-left: 28px !important;
+      padding-right: 28px !important;
+      white-space: nowrap;
+    }
+  }
+</style>
+
 <div id="mlb2-787755" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-787755">
   <div class="ml-form-align-center ">
     <div class="ml-form-embedWrapper embedForm">

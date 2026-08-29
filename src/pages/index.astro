@@ -6,7 +6,7 @@ import { SITE } from "@/data/site";
 
 const latestArticles = (await getCollection("articles", ({ data }) => !data.draft))
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
-  .slice(0, 3);
+  .slice(0, 6);
 
 const [featuredBook] = (await getCollection("books")).sort((a, b) => a.data.order - b.data.order);
 const bookSummary = featuredBook
@@ -51,13 +51,15 @@ const bookSummary = featuredBook
   </section>
 
   <section class="mx-auto max-w-6xl px-6 py-16 md:py-20">
-    <div class="flex items-center justify-between mb-8">
-      <p class="eyebrow">Latest writing</p>
-      <a href="/articles" class="text-sm font-medium text-clay hover:underline">View all &rarr;</a>
-    </div>
+    <p class="eyebrow mb-8">Latest writing</p>
     <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {latestArticles.map((entry) => <li><ArticleCard entry={entry} /></li>)}
     </ul>
+    <div class="mt-12 flex justify-center">
+      <a href="/articles" class="rounded-full border border-ink/20 px-6 py-3 text-sm font-medium text-ink hover:border-ink hover:bg-ink/5 transition-colors">
+        View All Writings
+      </a>
+    </div>
   </section>
 
   <section class="border-t border-ink/10 bg-parchment-dim/50">
