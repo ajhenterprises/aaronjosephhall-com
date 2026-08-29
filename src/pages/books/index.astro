@@ -23,8 +23,18 @@ const books = (await getCollection("books")).sort((a, b) => a.data.order - b.dat
       {books.map((book) => (
         <li>
           <a href={`/books/${book.id}/`} class="group grid grid-cols-[auto_1fr] gap-6 items-start">
-            <div class="w-28 aspect-[2/3] bg-parchment-dim border border-ink/10 rounded flex items-center justify-center overflow-hidden">
-              <span class="font-display text-stone text-xs px-2 text-center opacity-60">Cover pending</span>
+            <div class="w-28 aspect-[2/3] bg-parchment-dim border border-ink/10 rounded overflow-hidden shrink-0">
+              {book.data.cover ? (
+                <img
+                  src={book.data.cover}
+                  alt={book.data.coverAlt ?? `${book.data.title} book cover`}
+                  class="h-full w-full object-cover"
+                />
+              ) : (
+                <div class="h-full w-full flex items-center justify-center">
+                  <span class="font-display text-stone text-xs px-2 text-center opacity-60">Cover pending</span>
+                </div>
+              )}
             </div>
             <div>
               <h2 class="font-display text-2xl text-ink group-hover:text-clay">{book.data.title}</h2>

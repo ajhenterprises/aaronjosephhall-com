@@ -74,26 +74,30 @@ const speaking = defineCollection({
 
 const books = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/books" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      subtitle: z.string().optional(),
-      isbn10: z.string().optional(),
-      isbn13: z.string().optional(),
-      pageCount: z.number().optional(),
-      publisher: z.string().optional(),
-      publishDate: z.coerce.date().optional(),
-      cover: image().optional(),
-      coverAlt: z.string().optional(),
-      purchaseLinks: z
-        .array(z.object({ label: z.string(), url: z.string().url() }))
-        .default([]),
-      excerpt: z.string(),
-      seoTitle: z.string().optional(),
-      seoDescription: z.string().optional(),
-      order: z.number().default(99),
-      contentPending: z.boolean().default(false),
-    }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    isbn10: z.string().optional(),
+    isbn13: z.string().optional(),
+    pageCount: z.number().optional(),
+    language: z.string().optional(),
+    dimensions: z.string().optional(),
+    publisher: z.string().optional(),
+    publishDate: z.coerce.date().optional(),
+    // A path into public/ (e.g. "/Some Cover.jpg"), like the site's other
+    // owner-uploaded photos — not a local src/ asset, so plain string
+    // rather than the image() schema helper.
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
+    purchaseLinks: z
+      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .default([]),
+    excerpt: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    order: z.number().default(99),
+    contentPending: z.boolean().default(false),
+  }),
 });
 
 export const collections = { articles, speaking, books };
