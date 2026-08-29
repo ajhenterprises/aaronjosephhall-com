@@ -2,6 +2,8 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { SITE } from "@/data/site";
 
+export const prerender = true;
+
 export async function GET(context) {
   const articles = await getCollection(
     "articles",

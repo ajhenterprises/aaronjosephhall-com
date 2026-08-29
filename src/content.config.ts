@@ -61,6 +61,8 @@ const speaking = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      // Optional short tag shown alongside the title, e.g. "Leadership".
+      category: z.string().optional(),
       order: z.number().default(99),
       excerpt: z.string(),
       image: image().optional(),

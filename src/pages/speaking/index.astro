@@ -1,8 +1,13 @@
 ---
+export const prerender = true;
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE } from "@/data/site";
 
 const topics = (await getCollection("speaking")).sort((a, b) => a.data.order - b.data.order);
+
+const eventTypes = ["Sunday Service", "Conference", "Retreat", "Workshop", "Other"];
+const topicOptions = [...topics.map((t) => t.data.title), "Other Topics"];
 ---
 
 <BaseLayout
@@ -17,12 +22,174 @@ const topics = (await getCollection("speaking")).sort((a, b) => a.data.order - b
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 py-16">
-    <ul class="grid gap-8 md:grid-cols-3">
+  <section class="mx-auto max-w-4xl px-6 py-16 md:py-20">
+    <p class="eyebrow">A teacher who prepares</p>
+    <p class="mt-4 text-lg text-stone">
+      Aaron brings pastoral warmth and thoughtful preparation to every room—whether he's speaking
+      at a Sunday gathering, conference, nonprofit board retreat, private event, or leading a
+      half-day workshop with a staff team.
+    </p>
+  </section>
+
+  <section class="border-t border-ink/10 bg-parchment-dim/50">
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-20 grid gap-10 sm:grid-cols-[auto_1fr] sm:items-start">
+      <div class="mx-auto w-40 sm:w-48 aspect-square overflow-hidden rounded-2xl bg-parchment shrink-0">
+        <img
+          src="/AaronJosephHall.jpg"
+          alt={SITE.name}
+          width="1500"
+          height="1501"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="eyebrow">Speaker Bio</p>
+        <p class="mt-4 text-stone">
+          Aaron Joseph Hall is a pastor, church planter, writer, and speaker who teaches on faith,
+          leadership, communication, and discipleship. He helps leaders and teams grow in clarity,
+          conviction, and confidence. His talks are faith-filled, practical, and designed to be
+          remembered, applied, and shared—regardless of the setting.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-pine text-parchment">
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brass-light">More Than a Message</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">Something You Can Remember, Apply, and Share.</h2>
+
+      <p class="mt-6 text-parchment/85">
+        Great speaking isn't just about what people hear in the moment. It's about what they
+        remember when they leave, what they apply when they get home, and what they're able to
+        share with someone else.
+      </p>
+      <p class="mt-4 text-parchment/85">
+        That's why I use the PSA Framework: Principle, Story, Application.
+      </p>
+      <p class="mt-4 text-parchment/85">
+        Whether I'm speaking on leadership, faith, church planting, communication, discipleship,
+        or another topic, I build every message around three simple elements:
+      </p>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {[
+          { letter: "P", label: "Principle", copy: "Give people a clear truth they can remember." },
+          { letter: "S", label: "Story", copy: "Make that truth memorable through a story, illustration, or real-life experience." },
+          { letter: "A", label: "Application", copy: "Show people what that truth looks like when they put it into practice." },
+        ].map((item) => (
+          <div class="rounded-2xl bg-pine-dark/60 p-6">
+            <span class="font-display text-2xl text-brass-light">{item.letter}</span>
+            <h3 class="mt-2 font-display text-xl">{item.label}</h3>
+            <p class="mt-2 text-sm text-parchment/85">{item.copy}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 text-parchment/85">The result is a message that goes beyond the stage.</p>
+      <p class="mt-4 text-parchment/85">
+        People don't just hear an idea—they understand it. They don't just understand it—they
+        remember it. And they don't just remember it—they know what to do with it.
+      </p>
+      <p class="mt-6 font-display text-xl">
+        Because the goal of every message isn't simply to say something worth hearing. It's to
+        give people something worth remembering, applying, and sharing.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 md:py-20">
+    <p class="eyebrow">Speaking Request</p>
+    <h2 class="mt-3 text-3xl md:text-4xl">Tell us about your event</h2>
+    <p class="mt-4 text-stone">
+      Tell Aaron about your event and his team will respond within a few business days.
+    </p>
+
+    <form id="speaking-request-form" class="mt-10 rounded-2xl border border-ink/10 bg-white shadow-sm p-6 sm:p-8" novalidate>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="sr-name" class="block text-sm font-medium text-ink-soft mb-1.5">Name</label>
+          <input id="sr-name" name="name" type="text" required autocomplete="name"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="sr-email" class="block text-sm font-medium text-ink-soft mb-1.5">Email</label>
+          <input id="sr-email" name="email" type="email" required autocomplete="email"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="sr-organization" class="block text-sm font-medium text-ink-soft mb-1.5">Organization / Church</label>
+          <input id="sr-organization" name="organization" type="text" autocomplete="organization"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="sr-event-date" class="block text-sm font-medium text-ink-soft mb-1.5">Event date</label>
+          <input id="sr-event-date" name="eventDate" type="date"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="sr-event-type" class="block text-sm font-medium text-ink-soft mb-1.5">Event type</label>
+          <select id="sr-event-type" name="eventType"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay">
+            <option value="">Select one&hellip;</option>
+            {eventTypes.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="sr-topic" class="block text-sm font-medium text-ink-soft mb-1.5">Desired speaking topic</label>
+          <select id="sr-topic" name="topic" required
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay">
+            <option value="">Select one&hellip;</option>
+            {topicOptions.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </div>
+        <div id="sr-topic-other-row" hidden class="sm:col-span-2">
+          <label for="sr-topic-other" class="block text-sm font-medium text-ink-soft mb-1.5">What topic did you have in mind?</label>
+          <input id="sr-topic-other" name="topicOther" type="text"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div class="sm:col-span-2">
+          <label for="sr-message" class="block text-sm font-medium text-ink-soft mb-1.5">Tell us about your event</label>
+          <textarea id="sr-message" name="message" rows="5" required
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay"></textarea>
+        </div>
+      </div>
+
+      <div class="hidden" aria-hidden="true">
+        <label for="sr-company">Company</label>
+        <input id="sr-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p id="sr-error" hidden class="mt-5 text-sm text-clay-dark"></p>
+
+      <div class="mt-6">
+        <button type="submit" id="sr-submit" class="rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors disabled:opacity-60">
+          Send Speaking Request
+        </button>
+      </div>
+    </form>
+
+    <div id="sr-success" hidden class="mt-10 rounded-2xl border border-ink/10 bg-white shadow-sm p-8 text-center">
+      <h3 class="font-display text-2xl text-ink">Thank you!</h3>
+      <p class="mt-2 text-stone">Your request has been sent. Aaron's team will respond within a few business days.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-ink/10 mx-auto max-w-6xl px-6 py-16 md:py-20">
+    <p class="eyebrow">Speaking Topics</p>
+    <p class="mt-4 max-w-2xl text-stone">
+      Below, you'll find a selection of topics Aaron regularly teaches and speaks on. While these
+      represent many of his key areas of focus, the list is not exhaustive. Aaron can also tailor
+      a message, workshop, or presentation to fit the specific needs, audience, and context of
+      your event or organization.
+    </p>
+
+    <ul class="mt-10 grid gap-8 md:grid-cols-3">
       {topics.map((topic) => (
         <li>
           <a href={`/speaking/${topic.id}`} class="group block h-full rounded-2xl border border-ink/10 bg-white shadow-sm p-8 transition-shadow hover:shadow-md">
-            <h2 class="font-display text-2xl text-ink group-hover:text-clay">{topic.data.title}</h2>
+            {topic.data.category && <p class="eyebrow">{topic.data.category}</p>}
+            <h2 class="mt-2 font-display text-2xl text-ink group-hover:text-clay">{topic.data.title}</h2>
             <p class="mt-3 text-stone text-sm">{topic.data.excerpt}</p>
             <span class="mt-5 inline-block text-sm font-medium text-clay">Learn more &rarr;</span>
           </a>
@@ -30,13 +197,61 @@ const topics = (await getCollection("speaking")).sort((a, b) => a.data.order - b
       ))}
     </ul>
 
-    <div class="mt-10 rounded-lg border border-dashed border-ink/10 bg-parchment-dim/60 p-8">
-      <h2 class="font-display text-xl">Other topics</h2>
+    <div class="mt-10 rounded-2xl border border-dashed border-ink/10 bg-parchment-dim/60 p-8">
+      <h2 class="font-display text-xl">Other Topics</h2>
       <p class="mt-2 text-stone text-sm max-w-2xl">
-        The live site's speaking index includes "Other Topics" as a flexible catch-all option.
-        Preserved here as a note until confirmed whether it points to a dedicated page, a form, or
-        general availability language — flag the intended behavior and I'll build it out.
+        Don't see exactly what you're looking for? No problem. Select "Other Topics" in the
+        "Desired speaking topic" section above and share what you have in mind. Aaron can tailor
+        his message, workshop, or presentation to fit the needs of your audience, event, church,
+        organization, or team.
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById("speaking-request-form") as HTMLFormElement | null;
+  const topicSelect = document.getElementById("sr-topic") as HTMLSelectElement | null;
+  const topicOtherRow = document.getElementById("sr-topic-other-row") as HTMLElement | null;
+  const submitButton = document.getElementById("sr-submit") as HTMLButtonElement | null;
+  const errorEl = document.getElementById("sr-error") as HTMLElement | null;
+  const successEl = document.getElementById("sr-success") as HTMLElement | null;
+
+  topicSelect?.addEventListener("change", () => {
+    const isOther = topicSelect.value === "Other Topics";
+    if (topicOtherRow) topicOtherRow.hidden = !isOther;
+  });
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!submitButton || !errorEl) return;
+
+    errorEl.hidden = true;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/speaking-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || "Something went wrong. Please try again.");
+      }
+
+      form.hidden = true;
+      if (successEl) successEl.hidden = false;
+    } catch (err) {
+      errorEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      errorEl.hidden = false;
+      submitButton.disabled = false;
+      submitButton.textContent = "Send Speaking Request";
+    }
+  });
+</script>
