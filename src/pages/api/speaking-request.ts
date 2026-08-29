@@ -1,5 +1,4 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/data/site";
 
 // This is the one dynamic route on an otherwise fully static site (see
 // `output: "server"` + `export const prerender = true` on every page in
@@ -12,6 +11,9 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 // (Resend dashboard → Domains → add + verify the DNS records it gives you).
 // Sending from an unverified domain's address is rejected by Resend's API.
 const FROM_ADDRESS = "Aaron Joseph Hall <aaron@aaronjosephhall.com>";
+// Speaking request notifications go to Aaron directly, distinct from
+// SITE.email (the public "hello@" address shown elsewhere on the site).
+const TO_ADDRESS = "aaron@aaronjosephhall.com";
 
 const REQUIRED_FIELDS = ["name", "email", "topic", "message"] as const;
 
@@ -96,7 +98,7 @@ export const POST: APIRoute = async ({ request }) => {
     },
     body: JSON.stringify({
       from: FROM_ADDRESS,
-      to: [SITE.email],
+      to: [TO_ADDRESS],
       reply_to: email,
       subject: `New speaking request from ${name}`,
       html,
