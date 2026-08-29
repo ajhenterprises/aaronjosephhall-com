@@ -1,55 +1,130 @@
 ---
 export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ContentPendingNotice from "@/components/ContentPendingNotice.astro";
+import { SITE } from "@/data/site";
+
+const quickFacts = [
+  {
+    label: "Ministry Background",
+    copy: "More than a decade of local church ministry, including student ministry, communications, and church planting.",
+  },
+  {
+    label: "Writing",
+    copy: "Essays and books on discipleship, leadership, and communication, published regularly for a growing readership of pastors, ministry leaders, and thoughtful Christians.",
+  },
+  {
+    label: "Speaking",
+    copy: "Churches, conferences, nonprofit gatherings, schools, and marketplace leadership events — from keynote sessions to hands-on workshops.",
+  },
+  {
+    label: "Leadership Experience",
+    copy: "Building and leading teams, elder boards, and volunteer cultures; coaching leaders through growth, conflict, transition, and renewal.",
+  },
+];
+
+const philosophy = [
+  "Clarity is a form of kindness.",
+  "People are not projects.",
+  "Depth beats speed.",
+  "The best leadership is pastoral, and the best pastoring is honest.",
+];
+
+const values = [
+  "Scripture over trends",
+  "Clarity over cleverness",
+  "People over platforms",
+  "Endurance over intensity",
+  "Honesty over image",
+];
 ---
 
 <BaseLayout
   title="About"
-  description="About Aaron Joseph Hall — pastor, husband, father, and author, doing digital media work in website development & hosting and content + copywriting."
+  description="Aaron Joseph Hall is the founding lead pastor of Jubilee City Church in Daphne, Alabama, a writer, and speaker."
   path="/about"
 >
-  <section class="mx-auto max-w-4xl px-6 py-16 md:py-24">
-    <p class="eyebrow">About</p>
-    <h1 class="mt-3 text-4xl md:text-5xl">About Aaron</h1>
+  <section class="border-b border-ink/10 bg-parchment-dim/50">
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-24">
+      <p class="eyebrow">About</p>
+      <h1 class="mt-3 text-4xl md:text-5xl">About Aaron</h1>
+      <p class="mt-6 max-w-2xl text-lg text-stone">
+        Aaron Joseph Hall is the founding lead pastor of Jubilee City Church in Daphne, Alabama, a
+        writer, and speaker. He teaches on faith, leadership, and communication, and helps leaders
+        build healthy teams and lasting ministries.
+      </p>
+    </div>
+  </section>
 
-    <div class="prose-article mt-10">
-      <ContentPendingNotice variant="ai-draft" />
-
+  <section class="mx-auto max-w-4xl px-6 py-16 md:py-20 grid gap-10 sm:grid-cols-[auto_1fr] sm:items-start">
+    <div class="mx-auto w-40 sm:w-48 aspect-square overflow-hidden rounded-2xl bg-parchment-dim shrink-0">
+      <img
+        src="/AaronJosephHall.jpg"
+        alt={SITE.name}
+        width="1500"
+        height="1501"
+        class="h-full w-full object-cover"
+      />
+    </div>
+    <div class="prose-article">
       <p>
-        I'm a pastor by calling and a writer by compulsion — I tend to think in sentences whether
-        I'm standing in front of a congregation, sitting across from someone in crisis, or just
-        trying to figure out what I actually believe about something. Most of what I write comes
-        out of that same instinct: not theory first, but a real question from a real week, worked
-        out slowly until it says something true.
+        Aaron Joseph Hall has spent his adult life in the local church—first as a volunteer, then
+        as a youth pastor, and eventually as the founding pastor of a church plant, Jubilee City
+        Church. Along the way, he learned that faithfulness is usually unglamorous: showing up,
+        telling the truth, loving people who are hard to love, and preaching the same gospel again
+        and again until it becomes the air a community breathes.
       </p>
-
       <p>
-        Before any of that, I'm a husband and a father, and that's not a footnote — it's most of
-        what actually shapes how I lead and what I write about. The people who watch me most
-        closely aren't a congregation or an audience; they're my own family, and I'd rather be
-        honest about that tension than perform a version of leadership that doesn't survive
-        contact with home.
+        Today Aaron pastors, writes, and teaches. His writing explores what it looks like to
+        follow Jesus in ordinary life and to lead others without losing your soul. His teaching
+        draws on Scripture, church history, and the practical realities of leading people. He
+        currently serves as a lead pastor while writing, teaching, and coaching leaders.
       </p>
+    </div>
+  </section>
 
-      <p>
-        This site is my ministry blog — writing on life, faith, family, ministry, and technology,
-        the ordinary and the eternal both. Alongside that, I do digital media work: website
-        development &amp; hosting, and content + copywriting for churches, ministries, and
-        organizations that need a site built well and words written with care.
-      </p>
+  <section class="border-t border-ink/10 bg-parchment-dim/50">
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-20 grid gap-6 sm:grid-cols-2">
+      {quickFacts.map((fact) => (
+        <div class="rounded-2xl border border-ink/10 bg-white shadow-sm p-6">
+          <h2 class="font-display text-xl">{fact.label}</h2>
+          <p class="mt-2 text-sm text-stone">{fact.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-      <p>
-        If you're here for the writing, you'll find essays on life, faith, family, and ministry.
-        If you're here about working together on a website or content, you'll find that too.
-        Either way — thanks for being here.
-      </p>
+  <section class="bg-pine text-parchment">
+    <div class="mx-auto max-w-3xl px-6 py-16 md:py-20">
+      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brass-light">Personal Philosophy</p>
+      <ul class="mt-6 space-y-4">
+        {philosophy.map((line) => (
+          <li class="font-display text-2xl md:text-3xl text-parchment">{line}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-      <p class="content-pending-notice not-prose">
-        <strong>Needs your input:</strong> I deliberately left out specifics I can't verify —
-        church name, city, family details, timeline, credentials. Drop those in (or just rewrite
-        the whole thing) and I'll wire it in exactly as you give it to me.
-      </p>
+  <section class="mx-auto max-w-4xl px-6 py-16 md:py-20">
+    <p class="eyebrow">Values</p>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+      {values.map((value) => (
+        <li class="flex items-center gap-3 rounded-lg border border-ink/10 bg-white shadow-sm px-5 py-4">
+          <span class="h-1.5 w-1.5 rounded-full bg-clay shrink-0" aria-hidden="true"></span>
+          <span class="text-ink-soft">{value}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="border-t border-ink/10 bg-parchment-dim/50">
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-20 flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <h2 class="font-display text-2xl">Bring Aaron to your church or event</h2>
+        <p class="mt-2 text-stone">Speaking, coaching, and leadership development.</p>
+      </div>
+      <a href="/speaking" class="shrink-0 rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
+        Speaking Request
+      </a>
     </div>
   </section>
 </BaseLayout>
