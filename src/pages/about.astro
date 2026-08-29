@@ -20,6 +20,10 @@ const quickFacts = [
     label: "Leadership Experience",
     copy: "Building and leading teams, elder boards, and volunteer cultures; coaching leaders through growth, conflict, transition, and renewal.",
   },
+  {
+    label: "Digital Media Work",
+    copy: "Website development & hosting, and content + copywriting — for churches, ministry leaders, and mission-driven nonprofits, as well as individuals and businesses.",
+  },
 ];
 
 const philosophy = [
@@ -79,6 +83,13 @@ const values = [
         draws on Scripture, church history, and the practical realities of leading people. He
         currently serves as a lead pastor while writing, teaching, and coaching leaders.
       </p>
+      <p>
+        Alongside that ministry life, Aaron also does digital media work: website development
+        &amp; hosting, and content + copywriting. It grew out of building and writing for his own
+        church, and he now brings the same care to churches, ministry leaders, and mission-driven
+        nonprofits — as well as individuals and businesses who want a site built well and words
+        written with care.
+      </p>
     </div>
   </section>
 
@@ -117,14 +128,21 @@ const values = [
   </section>
 
   <section class="border-t border-ink/10 bg-parchment-dim/50">
-    <div class="mx-auto max-w-4xl px-6 py-16 md:py-20 flex flex-wrap items-center justify-between gap-6">
-      <div>
-        <h2 class="font-display text-2xl">Bring Aaron to your church or event</h2>
-        <p class="mt-2 text-stone">Speaking, coaching, and leadership development.</p>
+    <div class="mx-auto max-w-4xl px-6 py-16 md:py-20 grid gap-6 sm:grid-cols-2">
+      <div class="rounded-2xl border border-ink/10 bg-white shadow-sm p-6 flex flex-col">
+        <h2 class="font-display text-xl">Bring Aaron to your church or event</h2>
+        <p class="mt-2 text-sm text-stone flex-1">Speaking, coaching, and leadership development.</p>
+        <a href="/speaking" class="mt-5 self-start rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
+          Speaking Request
+        </a>
       </div>
-      <a href="/speaking" class="shrink-0 rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
-        Speaking Request
-      </a>
+      <div class="rounded-2xl border border-ink/10 bg-white shadow-sm p-6 flex flex-col">
+        <h2 class="font-display text-xl">Need a website or content help?</h2>
+        <p class="mt-2 text-sm text-stone flex-1">Website development & hosting, and content + copywriting.</p>
+        <a href="/work-with-me" class="mt-5 self-start rounded-full border border-ink/20 px-6 py-3 text-sm font-medium text-ink hover:border-ink hover:bg-ink/5 transition-colors">
+          See Services
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
