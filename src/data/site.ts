@@ -6,8 +6,7 @@ export const SITE = {
   name: "Aaron Joseph Hall",
   tagline: "Pastor. Husband. Father. Author. Speaker.",
   url: "https://aaronjosephhall.com",
-  // TODO: confirm public contact email
-  email: "hello@aaronjosephhall.com",
+  email: "aaron@aaronjosephhall.com",
   locale: "en-US",
 };
 
