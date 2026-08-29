@@ -8,9 +8,6 @@ const latestArticles = (await getCollection("articles", ({ data }) => !data.draf
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
   .slice(0, 3);
 
-const speakingTopics = (await getCollection("speaking")).sort((a, b) => a.data.order - b.data.order);
-const speakingSummary = speakingTopics.map((t) => t.data.title).join(", ");
-
 const [featuredBook] = (await getCollection("books")).sort((a, b) => a.data.order - b.data.order);
 const bookSummary = featuredBook
   ? [featuredBook.data.title, featuredBook.data.subtitle].filter(Boolean).join(": ")
@@ -66,7 +63,11 @@ const bookSummary = featuredBook
   <section class="border-t border-stone-light/60 bg-parchment-dim/50">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {[
-        { label: "Speaking", href: "/speaking", copy: speakingSummary || "Topics available on request." },
+        {
+          label: "Speaking",
+          href: "/speaking",
+          copy: "Aaron speaks on Leadership, Church Planting, Faith, Culture, and more, bringing honest conversations and practical biblical insight to churches, conferences, and events.",
+        },
         { label: "Books", href: "/books", copy: bookSummary },
         { label: "Work With Me", href: "/work-with-me", copy: "Website development & hosting, and content + copywriting." },
         { label: "Newsletter", href: "/newsletter", copy: "Get new writing and updates in your inbox." },
