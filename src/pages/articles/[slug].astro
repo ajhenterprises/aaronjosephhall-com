@@ -100,13 +100,13 @@ const jsonLd = {
       {prev ? (
         <a href={`/articles/${prev.id}`} class="group">
           <p class="eyebrow">Previous</p>
-          <p class="mt-1 font-display text-lg group-hover:text-clay-dark">{prev.data.title}</p>
+          <p class="mt-1 font-display text-lg group-hover:text-clay">{prev.data.title}</p>
         </a>
       ) : <div />}
       {next ? (
         <a href={`/articles/${next.id}`} class="group sm:text-right">
           <p class="eyebrow">Next</p>
-          <p class="mt-1 font-display text-lg group-hover:text-clay-dark">{next.data.title}</p>
+          <p class="mt-1 font-display text-lg group-hover:text-clay">{next.data.title}</p>
         </a>
       ) : <div />}
     </nav>

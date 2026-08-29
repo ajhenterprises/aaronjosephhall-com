@@ -12,14 +12,6 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-ink/10 mt-24">
-  {!hideNewsletterForm && (
-    <div class="border-b border-ink/10 bg-parchment-dim/50">
-      <div class="mx-auto max-w-6xl px-6 py-14 flex justify-center">
-        <NewsletterForm />
-      </div>
-    </div>
-  )}
-
   <div class="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-3">
     <div>
       <p class="font-display text-lg text-ink">{SITE.name}</p>
@@ -30,7 +22,7 @@ const year = new Date().getFullYear();
       <p class="eyebrow mb-3">Site</p>
       <ul class="space-y-2">
         {NAV_LINKS.map((link) => (
-          <li><a href={link.href} class="text-ink-soft hover:text-clay-dark">{link.label}</a></li>
+          <li><a href={link.href} class="text-ink-soft hover:text-clay">{link.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -38,16 +30,24 @@ const year = new Date().getFullYear();
     <div class="text-sm">
       <p class="eyebrow mb-3">Connect</p>
       <ul class="space-y-2">
-        <li><a href={`mailto:${SITE.email}`} class="text-ink-soft hover:text-clay-dark">{SITE.email}</a></li>
-        <li><a href="/rss.xml" class="text-ink-soft hover:text-clay-dark">RSS feed</a></li>
+        <li><a href={`mailto:${SITE.email}`} class="text-ink-soft hover:text-clay">{SITE.email}</a></li>
+        <li><a href="/rss.xml" class="text-ink-soft hover:text-clay">RSS feed</a></li>
         {SOCIAL_LINKS.map((s) => (
-          <li><a href={s.href} target="_blank" rel="noreferrer" class="text-ink-soft hover:text-clay-dark">{s.label}</a></li>
+          <li><a href={s.href} target="_blank" rel="noreferrer" class="text-ink-soft hover:text-clay">{s.label}</a></li>
         ))}
       </ul>
     </div>
   </div>
 
   <div class="bg-pine">
+    {!hideNewsletterForm && (
+      <div class="border-b border-parchment/15">
+        <div class="mx-auto max-w-6xl px-6 py-14 flex justify-center">
+          <NewsletterForm />
+        </div>
+      </div>
+    )}
+
     <div class="mx-auto max-w-6xl px-6 py-6 text-center">
       <p class="text-sm text-parchment/90">
         Do you need a website? I can build one for you! <a href="/contact" class="font-medium text-brass-light hover:underline">Contact me today!</a>

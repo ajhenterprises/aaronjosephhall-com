@@ -66,7 +66,7 @@ const jsonLd = {
       {purchaseLinks.length > 0 && (
         <div class="mt-8 flex flex-wrap gap-3">
           {purchaseLinks.map((link) => (
-            <a href={link.url} target="_blank" rel="noreferrer" class="rounded bg-ink text-parchment px-5 py-2.5 text-sm font-medium hover:bg-clay-dark transition-colors">
+            <a href={link.url} target="_blank" rel="noreferrer" class="rounded-full bg-clay text-parchment px-5 py-2.5 text-sm font-medium hover:bg-clay-dark transition-colors">
               {link.label}
             </a>
           ))}
