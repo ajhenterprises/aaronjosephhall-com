@@ -6,7 +6,7 @@ import { escapeHtml, isHoneypotFilled, sendNotificationEmail } from "@/lib/email
 // astro.config.mjs / each page file).
 export const prerender = false;
 
-const REQUIRED_FIELDS = ["name", "email", "topic", "message"] as const;
+const REQUIRED_FIELDS = ["name", "email", "reason", "message"] as const;
 
 export const POST: APIRoute = async ({ request }) => {
   let data: Record<string, string>;
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const apiKey = import.meta.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("RESEND_API_KEY is not set — cannot send speaking request email.");
+    console.error("RESEND_API_KEY is not set — cannot send contact email.");
     return new Response(JSON.stringify({ ok: false, error: "Email delivery is not configured yet." }), {
       status: 500,
     });
@@ -38,24 +38,17 @@ export const POST: APIRoute = async ({ request }) => {
 
   const name = String(data.name).trim();
   const email = String(data.email).trim();
-  const organization = String(data.organization ?? "").trim();
-  const eventDate = String(data.eventDate ?? "").trim();
-  const eventType = String(data.eventType ?? "").trim();
-  const topic = String(data.topic).trim();
-  const topicOther = String(data.topicOther ?? "").trim();
+  const reason = String(data.reason).trim();
   const message = String(data.message).trim();
 
   const rows: [string, string][] = [
     ["Name", name],
     ["Email", email],
-    ["Organization / Church", organization || "—"],
-    ["Event date", eventDate || "—"],
-    ["Event type", eventType || "—"],
-    ["Desired topic", topic === "Other Topics" && topicOther ? `Other — ${topicOther}` : topic],
+    ["Reason", reason],
   ];
 
   const html = `
-    <h2>New speaking request</h2>
+    <h2>New contact message</h2>
     <table cellpadding="4" cellspacing="0">
       ${rows.map(([label, value]) => `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${escapeHtml(value)}</td></tr>`).join("")}
     </table>
@@ -73,7 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
   const result = await sendNotificationEmail({
     apiKey,
     replyTo: email,
-    subject: `New speaking request from ${name}`,
+    subject: `New contact message from ${name}`,
     html,
     text,
   });

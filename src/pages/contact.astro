@@ -2,32 +2,121 @@
 export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { SITE } from "@/data/site";
+
+const reasons = ["General Inquiry", "Writing / Media / Interview", "Website or Content Work", "Other"];
+const obfuscatedEmail = SITE.email.replace("@", " [at] ").replace(/\.(?=[^.]*$)/, " [dot] ");
 ---
 
 <BaseLayout
   title="Contact"
-  description="Get in touch with Aaron Joseph Hall."
+  description="Get in touch with Aaron Joseph Hall — for writing, media, interviews, general questions, or to inquire about any of the services he offers."
   path="/contact"
 >
   <section class="mx-auto max-w-2xl px-6 py-16 md:py-24">
-    <p class="eyebrow">Contact</p>
-    <h1 class="mt-3 text-4xl md:text-5xl">Get in touch</h1>
+    <p class="eyebrow">Get in touch</p>
+    <h1 class="mt-3 text-4xl md:text-5xl">Contact Aaron Joseph Hall</h1>
     <p class="mt-6 text-stone text-lg">
-      For speaking, ministry, or website & content work inquiries, reach out directly.
+      For writing, media, interviews, general questions, or to inquire about any of the services I
+      offer, send a note below. I'd love to hear from you.
     </p>
 
-    <div class="mt-10 rounded-lg border border-dashed border-ink/10 bg-parchment-dim/60 p-6 text-sm text-stone">
-      This site is static, so the original contact form (if any) needs a form backend
-      (e.g. Formspree, Resend, or a Vercel serverless function acting only as a mail relay —
-      no database involved). Confirm whether the live site used a form or a plain mailto link,
-      and I'll wire up the equivalent here.
+    <div class="mt-10 rounded-2xl border border-ink/10 border-l-4 border-l-clay bg-parchment-dim/60 p-6">
+      <h2 class="font-display text-lg">Booking Aaron to speak?</h2>
+      <p class="mt-2 text-sm text-stone">
+        Use the speaking request form so your event details reach the right place.
+      </p>
+      <a href="/speaking" class="mt-3 inline-block text-sm font-medium text-clay hover:underline">
+        Go to speaking requests &rarr;
+      </a>
+      <p class="mt-4 text-sm text-stone">
+        Prefer email? <span class="text-ink-soft">{obfuscatedEmail}</span>
+      </p>
     </div>
 
-    <a
-      href={`mailto:${SITE.email}`}
-      class="mt-8 inline-block rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
-    >
-      {SITE.email}
-    </a>
+    <form id="contact-form" class="mt-10 rounded-2xl border border-ink/10 bg-white shadow-sm p-6 sm:p-8" novalidate>
+      <div class="grid gap-5">
+        <div>
+          <label for="c-name" class="block text-sm font-medium text-ink-soft mb-1.5">Name</label>
+          <input id="c-name" name="name" type="text" required autocomplete="name"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="c-email" class="block text-sm font-medium text-ink-soft mb-1.5">Email</label>
+          <input id="c-email" name="email" type="email" required autocomplete="email"
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay" />
+        </div>
+        <div>
+          <label for="c-reason" class="block text-sm font-medium text-ink-soft mb-1.5">Reason for contact</label>
+          <select id="c-reason" name="reason" required
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay">
+            <option value="">Select one&hellip;</option>
+            {reasons.map((r) => <option value={r}>{r}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="c-message" class="block text-sm font-medium text-ink-soft mb-1.5">Message</label>
+          <textarea id="c-message" name="message" rows="5" required
+            class="w-full rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-clay"></textarea>
+        </div>
+      </div>
+
+      <div class="hidden" aria-hidden="true">
+        <label for="c-company">Company</label>
+        <input id="c-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p id="c-error" hidden class="mt-5 text-sm text-clay-dark"></p>
+
+      <div class="mt-6">
+        <button type="submit" id="c-submit" class="rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors disabled:opacity-60">
+          Send Message
+        </button>
+      </div>
+    </form>
+
+    <div id="c-success" hidden class="mt-10 rounded-2xl border border-ink/10 bg-white shadow-sm p-8 text-center">
+      <h3 class="font-display text-2xl text-ink">Thank you!</h3>
+      <p class="mt-2 text-stone">Your message has been sent. Aaron will get back to you soon.</p>
+    </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const submitButton = document.getElementById("c-submit") as HTMLButtonElement | null;
+  const errorEl = document.getElementById("c-error") as HTMLElement | null;
+  const successEl = document.getElementById("c-success") as HTMLElement | null;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!submitButton || !errorEl) return;
+
+    errorEl.hidden = true;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || "Something went wrong. Please try again.");
+      }
+
+      form.hidden = true;
+      if (successEl) successEl.hidden = false;
+    } catch (err) {
+      errorEl.textContent = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      errorEl.hidden = false;
+      submitButton.disabled = false;
+      submitButton.textContent = "Send Message";
+    }
+  });
+</script>
