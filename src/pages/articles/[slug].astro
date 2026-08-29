@@ -96,7 +96,7 @@ const jsonLd = {
   </article>
 
   {(prev || next) && (
-    <nav aria-label="Article navigation" class="mx-auto max-w-3xl px-6 pb-16 grid gap-4 sm:grid-cols-2 border-t border-stone-light/60 pt-10">
+    <nav aria-label="Article navigation" class="mx-auto max-w-3xl px-6 pb-16 grid gap-4 sm:grid-cols-2 border-t border-ink/10 pt-10">
       {prev ? (
         <a href={`/articles/${prev.id}`} class="group">
           <p class="eyebrow">Previous</p>
@@ -113,7 +113,7 @@ const jsonLd = {
   )}
 
   {related.length > 0 && (
-    <section class="border-t border-stone-light/60 bg-parchment-dim/50">
+    <section class="border-t border-ink/10 bg-parchment-dim/50">
       <div class="mx-auto max-w-6xl px-6 py-16">
         <p class="eyebrow mb-8">Related writing</p>
         <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
