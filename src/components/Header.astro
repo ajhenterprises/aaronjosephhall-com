@@ -10,7 +10,7 @@ function isActive(href: string) {
 }
 ---
 
-<header class="border-b border-stone-light/60 bg-parchment/95 backdrop-blur sticky top-0 z-40">
+<header class="border-b border-ink/10 bg-parchment/95 backdrop-blur sticky top-0 z-40">
   <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
     <a href="/" class="font-display text-xl tracking-tight text-ink shrink-0">
       {SITE.name}
@@ -22,7 +22,7 @@ function isActive(href: string) {
           href={link.href}
           class:list={[
             "font-medium transition-colors hover:text-clay-dark",
-            isActive(link.href) ? "text-clay-dark" : "text-ink-soft",
+            isActive(link.href) ? "text-clay" : "text-ink-soft",
           ]}
           aria-current={isActive(link.href) ? "page" : undefined}
         >
@@ -32,12 +32,12 @@ function isActive(href: string) {
     </nav>
 
     <details class="md:hidden relative">
-      <summary class="list-none cursor-pointer select-none rounded border border-stone-light px-3 py-1.5 text-sm font-medium text-ink-soft">
+      <summary class="list-none cursor-pointer select-none rounded border border-ink/10 px-3 py-1.5 text-sm font-medium text-ink-soft">
         Menu
       </summary>
       <nav
         aria-label="Primary"
-        class="absolute right-0 mt-2 w-56 rounded-lg border border-stone-light bg-parchment shadow-lg p-3 flex flex-col gap-1"
+        class="absolute right-0 mt-2 w-56 rounded-lg border border-ink/10 bg-parchment shadow-lg p-3 flex flex-col gap-1"
       >
         {links.map((link) => (
           <a

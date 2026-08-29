@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Editorial, warm, masculine palette. Ink on parchment, one warm accent. */
-  --color-ink: #1c1917;
-  --color-ink-soft: #3a352f;
-  --color-parchment: #faf6ee;
-  --color-parchment-dim: #f1ead9;
-  --color-stone: #8a8175;
-  --color-stone-light: #d8d0c0;
-  --color-clay: #b5502f;
-  --color-clay-dark: #8f3d22;
-  --color-forest: #2f3b2e;
+  /* Warm "Gulf Coast" editorial palette: ink on parchment, terracotta clay
+     as the primary accent, with pine and brass as supporting accents for
+     bolder sections. */
+  --color-ink: #211f1c;
+  --color-ink-soft: #4a463f;
+  --color-parchment: #faf6ef;
+  --color-parchment-dim: #f1e7d4;
+  --color-stone: #746b5e;
+  --color-clay: #bd5f38;
+  --color-clay-dark: #9c4b2b;
+  --color-clay-light: #e3855a;
+  --color-pine: #2c4438;
+  --color-pine-dark: #1c2f27;
+  --color-brass-light: #e0c184;
 
   --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
@@ -44,8 +48,8 @@
   }
 
   ::selection {
-    background-color: var(--color-clay);
-    color: var(--color-parchment);
+    background-color: var(--color-clay-light);
+    color: var(--color-ink);
   }
 }
 
@@ -108,11 +112,11 @@
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-clay-dark);
+    color: var(--color-clay);
   }
 
   .content-pending-notice {
-    border: 1px dashed var(--color-stone-light);
+    border: 1px dashed color-mix(in srgb, var(--color-ink) 20%, transparent);
     background: var(--color-parchment-dim);
     color: var(--color-ink-soft);
     border-radius: 0.5rem;
