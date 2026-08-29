@@ -16,6 +16,8 @@ interface Props {
   noindex?: boolean;
   /** Optional JSON-LD structured data object(s) to embed. */
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  /** Omit the footer's embedded newsletter form, e.g. on a page that already features it. */
+  hideNewsletterForm?: boolean;
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   modifiedTime,
   noindex,
   structuredData,
+  hideNewsletterForm,
 } = Astro.props;
 
 const schemaBlocks = structuredData
@@ -73,6 +76,6 @@ const schemaBlocks = structuredData
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer hideNewsletterForm={hideNewsletterForm} />
   </body>
 </html>

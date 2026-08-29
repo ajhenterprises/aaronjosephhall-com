@@ -1,9 +1,25 @@
 ---
 import { NAV_LINKS, SITE, SOCIAL_LINKS } from "@/data/site";
+import NewsletterForm from "@/components/NewsletterForm.astro";
+
+interface Props {
+  /** Omit the embedded newsletter form, e.g. on a page that already features it. */
+  hideNewsletterForm?: boolean;
+}
+
+const { hideNewsletterForm = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-stone-light/60 mt-24">
+  {!hideNewsletterForm && (
+    <div class="border-b border-stone-light/60 bg-parchment-dim/50">
+      <div class="mx-auto max-w-6xl px-6 py-14 flex justify-center">
+        <NewsletterForm />
+      </div>
+    </div>
+  )}
+
   <div class="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-3">
     <div>
       <p class="font-display text-lg text-ink">{SITE.name}</p>
