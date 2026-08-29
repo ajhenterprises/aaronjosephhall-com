@@ -33,3 +33,8 @@ export const NAV_LINKS: (NavLink & { inNav?: boolean })[] = [
 export const SOCIAL_LINKS: { label: string; href: string }[] = [
   { label: "Substack", href: "https://substack.com/@aaronjosephhall" },
 ];
+
+export const LEGAL_LINKS: NavLink[] = [
+  { label: "Privacy Policy", href: "/legal/privacy-policy" },
+  { label: "Terms of Use", href: "/legal/terms-of-use" },
+];
