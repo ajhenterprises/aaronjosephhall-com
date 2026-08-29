@@ -8,11 +8,10 @@ import { SITE } from "@/data/site";
 export const prerender = false;
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-// Resend's shared sandbox sender — works without verifying a custom domain,
-// but can only deliver to the email address on the Resend account itself
-// (fine here, since that's SITE.email). Switch to a verified
-// speaking@aaronjosephhall.com sender once the domain is verified in Resend.
-const FROM_ADDRESS = "Speaking Requests <onboarding@resend.dev>";
+// Requires aaronjosephhall.com to be a verified sending domain in Resend
+// (Resend dashboard → Domains → add + verify the DNS records it gives you).
+// Sending from an unverified domain's address is rejected by Resend's API.
+const FROM_ADDRESS = "Aaron Joseph Hall <aaron@aaronjosephhall.com>";
 
 const REQUIRED_FIELDS = ["name", "email", "topic", "message"] as const;
 
