@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleCard from "@/components/ArticleCard.astro";
 import ContentPendingNotice from "@/components/ContentPendingNotice.astro";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure.astro";
 import { formatDate, readingTime } from "@/lib/format";
 import { SITE } from "@/data/site";
 
@@ -92,6 +93,7 @@ const jsonLd = {
           <ContentPendingNotice variant={aiDraft ? "ai-draft" : "empty"} />
         </div>
       )}
+      <AffiliateDisclosure />
       <Content />
     </div>
   </article>
