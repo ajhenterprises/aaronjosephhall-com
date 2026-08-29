@@ -44,7 +44,7 @@ const services = [
     <div class="mt-12">
       <ul class="grid gap-6 sm:grid-cols-2">
         {services.map((service) => (
-          <li class="rounded-lg border border-ink/10 bg-white/40 p-6">
+          <li class="rounded-2xl border border-ink/10 bg-white shadow-sm p-6">
             <h2 class="font-display text-xl">{service.name}</h2>
             <p class="mt-2 text-sm text-stone">{service.description}</p>
           </li>
@@ -55,7 +55,7 @@ const services = [
     <div class="mt-14">
       <a
         href={`mailto:${SITE.email}`}
-        class="inline-block rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
+        class="inline-block rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
       >
         Start a conversation
       </a>

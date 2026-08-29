@@ -30,10 +30,10 @@ const bookSummary = featuredBook
           development &amp; hosting, and content + copywriting.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/articles" class="rounded bg-ink text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
+          <a href="/articles" class="rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
             Read the writing
           </a>
-          <a href="/work-with-me" class="rounded border border-ink px-6 py-3 text-sm font-medium text-ink hover:bg-ink hover:text-parchment transition-colors">
+          <a href="/work-with-me" class="rounded-full border border-ink/20 px-6 py-3 text-sm font-medium text-ink hover:border-ink hover:bg-ink/5 transition-colors">
             Work with me
           </a>
         </div>
@@ -72,8 +72,8 @@ const bookSummary = featuredBook
         { label: "Work With Me", href: "/work-with-me", copy: "Website development & hosting, and content + copywriting." },
         { label: "Newsletter", href: "/newsletter", copy: "Get new writing and updates in your inbox." },
       ].map((card) => (
-        <a href={card.href} class="group block rounded-lg border border-ink/10 bg-white/40 p-6 hover:shadow-md transition-shadow">
-          <h2 class="font-display text-xl group-hover:text-clay-dark">{card.label}</h2>
+        <a href={card.href} class="group block rounded-2xl border border-ink/10 bg-white shadow-sm p-6 hover:shadow-md transition-shadow">
+          <h2 class="font-display text-xl group-hover:text-clay">{card.label}</h2>
           <p class="mt-2 text-sm text-stone">{card.copy}</p>
         </a>
       ))}
