@@ -14,17 +14,60 @@ const services = [
       "Writing for the site itself, emails, and blog posts — copy that sounds like you and says what it needs to say.",
   },
 ];
+
+const process = [
+  {
+    step: "1",
+    name: "Discover",
+    description:
+      "We talk through who you are, what you need the site or content to do, and who it needs to reach — before a single word or line of code.",
+  },
+  {
+    step: "2",
+    name: "Design & Build",
+    description:
+      "A fast, modern site (or the content itself) takes shape, built around your voice and your goals, with room for your feedback along the way.",
+  },
+  {
+    step: "3",
+    name: "Launch",
+    description: "We go live. Hosting, domain, and the details that keep a launch from being stressful.",
+  },
+  {
+    step: "4",
+    name: "Support",
+    description: "Ongoing hosting, upkeep, and updates, so the site stays secure and current long after launch.",
+  },
+];
 ---
 
 <BaseLayout
   title="Work With Me"
   description="Website development & hosting and content + copywriting from Aaron Joseph Hall, for churches, ministry leaders, and mission-driven nonprofits, as well as individuals and businesses."
   path="/work-with-me"
+  hideWorkNotice
 >
   <section class="border-b border-ink/10 bg-parchment-dim/50">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
       <p class="eyebrow">Work With Me</p>
       <h1 class="mt-3 text-4xl md:text-5xl max-w-2xl">Services</h1>
+    </div>
+  </section>
+
+  <section class="bg-clay text-parchment">
+    <div class="mx-auto max-w-6xl px-6 py-12 md:py-16 flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.14em] text-parchment/80">AJH Studio</p>
+        <h2 class="mt-2 text-2xl md:text-3xl">See the full studio — portfolio, process, and pricing.</h2>
+      </div>
+      <a
+        href="https://ajhstudio.com"
+        target="_blank"
+        rel="noreferrer"
+        class="shrink-0 rounded-full bg-parchment text-clay px-8 py-4 text-base font-semibold hover:bg-white transition-colors"
+      >
+        Visit AJH Studio &rarr;
+      </a>
     </div>
   </section>
 
@@ -46,8 +89,31 @@ const services = [
         ))}
       </ul>
     </div>
+  </section>
 
-    <div class="mt-14">
+  <section class="border-t border-ink/10 bg-parchment-dim/50">
+    <div class="mx-auto max-w-4xl px-6 py-16">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="mt-3 text-3xl">From first conversation to launch</h2>
+      <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+        {process.map((item) => (
+          <li class="rounded-2xl border border-ink/10 bg-white shadow-sm p-6">
+            <span class="font-display text-2xl text-clay">{item.step}</span>
+            <h3 class="mt-2 font-display text-xl">{item.name}</h3>
+            <p class="mt-2 text-sm text-stone">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-6 py-16 text-center">
+    <h2 class="font-display text-2xl">Ready to talk about your project?</h2>
+    <p class="mt-3 text-stone">
+      Visit <a href="https://ajhstudio.com" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">ajhstudio.com</a>
+      for the full studio, or reach out directly below.
+    </p>
+    <div class="mt-8">
       <a
         href="/contact"
         class="inline-block rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors"
