@@ -6,6 +6,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleCard from "@/components/ArticleCard.astro";
 import ContentPendingNotice from "@/components/ContentPendingNotice.astro";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure.astro";
+import ArticleWorkCTA from "@/components/ArticleWorkCTA.astro";
 import { formatDate, readingTime } from "@/lib/format";
 import { SITE } from "@/data/site";
 
@@ -65,6 +66,7 @@ const jsonLd = {
   publishedTime={date}
   image={image?.src}
   structuredData={jsonLd}
+  hideWorkNotice
 >
   <article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
     <p class="eyebrow">{category ?? "Category pending"}</p>
@@ -94,7 +96,9 @@ const jsonLd = {
         </div>
       )}
       <AffiliateDisclosure />
+      <ArticleWorkCTA variant="top" />
       <Content />
+      <ArticleWorkCTA variant="bottom" />
     </div>
   </article>
 
