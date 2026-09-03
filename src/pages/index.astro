@@ -17,18 +17,22 @@ const bookSummary = featuredBook
 
 <BaseLayout
   title={SITE.name}
-  description="Aaron Joseph Hall is a pastor, husband, father, and author. His ministry blog covers life, faith, family, ministry, and technology, alongside the website development, hosting, and content + copywriting work he does."
+  description="Aaron Joseph Hall is a pastor, husband, father, and author. His ministry blog covers life, faith, family, ministry, and technology, alongside the website development, hosting, and content + copywriting work he does, and his real estate work as a Realtor with VPR United Real Estate in Alabama."
   path="/"
 >
   <section class="border-b border-ink/10">
     <div class="mx-auto max-w-6xl px-6 py-20 md:py-32 grid gap-10 md:grid-cols-[1.3fr_1fr] items-end">
       <div>
-        <p class="eyebrow">Pastor &middot; Husband &middot; Father &middot; Author &middot; Speaker</p>
+        <p class="eyebrow">Pastor &middot; Husband &middot; Father &middot; Author &middot; Speaker &middot; Realtor</p>
         <h1 class="mt-4 text-5xl md:text-6xl leading-[0.95]">{SITE.name}</h1>
         <p class="mt-6 max-w-xl text-lg text-stone">
           I'm a pastor, husband, father, and author. This is my ministry blog — writing on life,
           faith, family, ministry, and technology — alongside the digital media work I do: website
-          development &amp; hosting, and content + copywriting.
+          development &amp; hosting, and content + copywriting. I'm also a Realtor with VPR United
+          Real Estate in Alabama —{" "}
+          <a href="https://soldwithhall.com" target="_blank" rel="noreferrer" class="font-medium text-clay hover:underline">
+            see soldwithhall.com
+          </a>.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/articles" class="rounded-full bg-clay text-parchment px-6 py-3 text-sm font-medium hover:bg-clay-dark transition-colors">
@@ -64,7 +68,7 @@ const bookSummary = featuredBook
   </section>
 
   <section class="border-t border-ink/10 bg-parchment-dim/50">
-    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {[
         {
           label: "Speaking",
@@ -74,8 +78,19 @@ const bookSummary = featuredBook
         { label: "Books", href: "/books", copy: bookSummary },
         { label: "Work With Me", href: "/work-with-me", copy: "Website development & hosting, and content + copywriting." },
         { label: "Newsletter", href: "/newsletter", copy: "Get new writing and updates in your inbox." },
+        {
+          label: "Real Estate",
+          href: "https://soldwithhall.com",
+          copy: "Realtor with VPR United Real Estate in Alabama — buying or selling? Let's talk.",
+          external: true,
+        },
       ].map((card) => (
-        <a href={card.href} class="group block rounded-2xl border border-ink/10 bg-white shadow-sm p-6 hover:shadow-md transition-shadow">
+        <a
+          href={card.href}
+          target={card.external ? "_blank" : undefined}
+          rel={card.external ? "noreferrer" : undefined}
+          class="group block rounded-2xl border border-ink/10 bg-white shadow-sm p-6 hover:shadow-md transition-shadow"
+        >
           <h2 class="font-display text-xl group-hover:text-clay">{card.label}</h2>
           <p class="mt-2 text-sm text-stone">{card.copy}</p>
         </a>
