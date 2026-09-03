@@ -29,9 +29,10 @@ export const NAV_LINKS: (NavLink & { inNav?: boolean })[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// TODO: confirm/replace with real profile URLs.
 export const SOCIAL_LINKS: { label: string; href: string }[] = [
-  { label: "Substack", href: "https://substack.com/@aaronjosephhall" },
+  { label: "Facebook", href: "https://www.facebook.com/AuthorAJH" },
+  { label: "Instagram", href: "https://www.instagram.com/aaronjosephhall" },
+  { label: "YouTube", href: "https://www.youtube.com/@aaronjosephhall" },
 ];
 
 export const LEGAL_LINKS: NavLink[] = [
